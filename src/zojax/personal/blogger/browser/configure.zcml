@@ -1,0 +1,65 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.personal.blogger">
+
+  <!-- write post action -->
+  <adapter
+     name="create.blogpost.post"
+     factory=".actions.WritePostActionPost" />
+
+  <browser:icon
+     name="zmi_icon"
+     file="page_add.png"
+     for=".interfaces.IWritePostAction" />
+
+  <!-- portlet managers -->
+  <zojax:portletManager
+     name="columns.left"
+     title="Left column portlets"
+     for="..interfaces.IPersonalBlogWorkspace"
+     portlettype=".interfaces.IPersonalBlogPortlet"
+     class="zojax.personal.space.portletmanager.PortletManager" />
+
+  <zojax:portletManager
+     name="columns.right"
+     title="Right column portlets"
+     for="..interfaces.IPersonalBlogWorkspace"
+     schema=".interfaces.IPersonalBlogPortletManager"
+     portlettype=".interfaces.IPersonalBlogPortlet"
+     class="zojax.personal.space.portletmanager.PortletManager" />
+
+  <!-- portlets -->
+  <zojax:portlet
+     title="Actions"
+     name="portlets.blogger.actions"
+     type=".interfaces.IPersonalBlogPortlet"
+     class="zojax.content.actions.portlet.ActionsPortlet" />
+
+  <zojax:portlet
+     title="Blog archive"
+     name="portlets.blogger.archive"
+     type=".interfaces.IPersonalBlogPortlet"
+     class="zojax.blogger.portlets.archive.BlogArchivePortlet" />
+
+  <zojax:portlet
+     title="Blog tags"
+     name="portlets.blogger.tags"
+     type=".interfaces.IPersonalBlogPortlet"
+     class="zojax.blogger.portlets.tags.BlogTagsPortlet" />
+
+  <zojax:portlet
+     title="Blog categories"
+     name="portlets.blogger.categories"
+     type=".interfaces.IPersonalBlogPortlet"
+     class="zojax.blogger.portlets.category.CategoriesPortlet" />
+
+  <zojax:portlet
+     title="Blog recent comments"
+     name="portlets.blogger.comments"
+     type=".interfaces.IPersonalBlogPortlet"
+     class="zojax.blogger.portlets.comments.BlogRecentCommentsPortlet" 
+     schema="zojax.blogger.portlets.interfaces.IRecentCommentsPortlet" />
+
+</configure>

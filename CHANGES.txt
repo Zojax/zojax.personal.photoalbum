@@ -1,0 +1,57 @@
+=======
+CHANGES
+=======
+
+0.4.2 (2009-11-20)
+------------------
+
+- Fix name in workspace factory
+
+
+0.4.1 (2009-08-12)
+------------------
+
+- Use new IWorkspaceFactory api
+
+
+0.4.0 (2009-06-25)
+------------------
+
+- Replace 'zojax:globalpermission' with 'zojax:permission'
+
+- Use special portlets manager for blog workspace
+
+- Copyright changed to 'Zope Foundation and Contributors'
+
+
+0.3.1 (2009-05-14)
+------------------
+
+- Fixed wrong interface name for constraints
+
+
+0.3.0 (2009-05-05)
+------------------
+
+- Fixed personal blog post constraints
+
+- Do not use z3c.autoinclude
+
+
+0.2.0 (2009-03-27)
+------------------
+
+- Fixed personal blogger permission checking,
+  use checkPermissionForPrincipal instead of checkPermission
+
+
+0.1.1 (2009-03-17)
+------------------
+
+- Do not load locales
+
+
+0.1.0 (2009-03-17)
+------------------
+
+- Initial release.
