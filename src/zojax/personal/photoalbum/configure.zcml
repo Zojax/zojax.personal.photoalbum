@@ -9,7 +9,7 @@
      title="Personal photos"
      description="Allow personal photos for member." />
 
-  <registerIn registry="zojax.photoalbum">
+  <registerIn registry="zojax.product.photoalbum">
     <!-- photoalbum post -->
     <zojax:contentConstraints
        name="content.photoalbum"
@@ -21,7 +21,8 @@
        title="Personal photos"
        class=".workspace.PersonalPhotosWorkspace"
        schema=".interfaces.IPersonalPhotosWorkspace"
-       contains="zojax.photoalbum.interfaces.IPhotosPostType"
+       contains="zojax.photoalbum.interfaces.IPhotoAlbumType
+                 zojax.photoalbum.interfaces.IPhotoType"
        type="zojax.content.type.interfaces.IInactiveType" />
 
     <class class=".workspace.PersonalPhotosWorkspace">
@@ -44,10 +45,6 @@
     <adapter
        name="photos"
        factory=".workspace.PersonalPhotosWorkspaceFactory" />
-
-    <adapter
-       for=".interfaces.IPersonalPhotosWorkspace"
-       factory="zojax.photoalbum.sized.PhotosSized" />
 
     <utility
        name="photos"
