@@ -21,7 +21,7 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.security.proxy import removeSecurityProxy
 
-from zojax.photoalbum.album import BasePhotos
+from zojax.photoalbum.album import PhotoAlbum
 
 from zojax.personal.space.interfaces import IPersonalSpace
 from zojax.personal.space.interfaces import IPersonalWorkspaceDescription
@@ -30,7 +30,7 @@ from zojax.security.utils import checkPermissionForPrincipal
 from interfaces import _, IPersonalPhotosWorkspace, IPersonalPhotosWorkspaceFactory
 
 
-class PersonalPhotosWorkspace(BasePhotos):
+class PersonalPhotosWorkspace(PhotoAlbum):
     interface.implements(IPersonalPhotosWorkspace)
 
     __name__ = u'photos'
