@@ -1,0 +1,80 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.personal.photoalbum">
+
+  <permission
+     id="zojax.PersonalPhotos"
+     title="Personal photos"
+     description="Allow personal photos for member." />
+
+  <registerIn registry="zojax.photoalbum">
+    <!-- photoalbum post -->
+    <zojax:contentConstraints
+       name="content.photoalbum"
+       containers="personal.workspace.photos" />
+
+    <!-- photoalbum workspace -->
+    <zojax:content
+       name="personal.workspace.photos"
+       title="Personal photos"
+       class=".workspace.PersonalPhotosWorkspace"
+       schema=".interfaces.IPersonalPhotosWorkspace"
+       contains="zojax.photoalbum.interfaces.IPhotosPostType"
+       type="zojax.content.type.interfaces.IInactiveType" />
+
+    <class class=".workspace.PersonalPhotosWorkspace">
+      <implements interface="zojax.catalog.interfaces.ISearchContext" />
+      <implements interface="zojax.content.type.interfaces.IRenameNotAllowed" />
+      <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+      <implements interface="zojax.content.tagging.interfaces.IContentTaggable" />
+
+      <require
+	 permission="zope.View"
+	 interface=".interfaces.IPersonalPhotosWorkspace
+                    zope.app.container.interfaces.IReadContainer" />
+      <require
+	 permission="zojax.ModifyContent"
+	 set_schema=".interfaces.IPersonalPhotosWorkspace"
+	 interface="zope.app.container.interfaces.IWriteContainer" />
+    </class>
+
+    <!-- content workspace factory -->
+    <adapter
+       name="photos"
+       factory=".workspace.PersonalPhotosWorkspaceFactory" />
+
+    <adapter
+       for=".interfaces.IPersonalPhotosWorkspace"
+       factory="zojax.photoalbum.sized.PhotosSized" />
+
+    <utility
+       name="photos"
+       factory=".workspace.PersonalPhotosWorkspaceDescription" />
+
+    <!-- personal photoalbum permission -->
+    <zojax:permission
+       permission="zojax.PersonalPhotos"
+       category="zojax.personal.space.interfaces.IPersonalPermission" />
+
+    <!-- browser -->
+    <include package=".browser" />
+  </registerIn>
+
+  <!-- permissions -->
+  <permissions for="zojax.personal.space.interfaces.IPersonalSpace"
+               name="personal.member.space">
+    <denyAll permission="zojax.AddPhoto" />
+    <denyAll permission="zojax.SubmitPhoto" />
+    <denyAll permission="zojax.AddPhotoalbum" />
+    <denyAll permission="zojax.SubmitPhotoalbum" />
+    <grant
+       role="content.Owner"
+       permission="zojax.AddPhoto" />
+    <grant
+       role="content.Owner"
+       permission="zojax.AddPhotoalbum" />
+  </permissions>
+
+</configure>

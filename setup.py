@@ -11,7 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-""" Setup for zojax.personal.blogger package
+""" Setup for zojax.personal.photoalbum package
 
 $Id$
 """
@@ -24,11 +24,11 @@ def read(*rnames):
 version='0'
 
 
-setup(name = 'zojax.personal.blogger',
+setup(name = 'zojax.personal.photoalbum',
       version = version,
-      author = 'Nikolay Kim',
-      author_email = 'fafhrd91@gmail.com',
-      description = "Personal blog.",
+      author = 'Anatoly Bubenkov',
+      author_email = 'bubenkoff@gmail.com',
+      description = "Personal pgotoalbum.",
       long_description = (
           'Detailed Documentation\n' +
           '======================\n'
@@ -51,7 +51,7 @@ setup(name = 'zojax.personal.blogger',
       package_dir = {'':'src'},
       namespace_packages=['zojax', 'zojax.personal'],
       install_requires = ['setuptools',
-                          'zojax.blogger',
+                          'zojax.photoalbum',
                           'zojax.layout',
                           'zojax.layoutform',
                           'zojax.statusmessage',

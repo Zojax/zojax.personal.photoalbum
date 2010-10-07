@@ -18,14 +18,14 @@ $Id$
 from zope import interface, schema
 from zope.i18nmessageid import MessageFactory
 from zojax.content.space.interfaces import IWorkspace
-from zojax.blogger.interfaces import IBlog, IBlogPost, IBloggerWorkspaceFactory
+from zojax.photoalbum.interfaces import IPhotoAlbum, IPhotosWorkspaceFactory
 
-_ = MessageFactory('zojax.content.space')
-
-
-class IPersonalBlogWorkspace(IBlog, IWorkspace):
-    """ blog workspace """
+_ = MessageFactory('zojax.personal.photoalbum')
 
 
-class IPersonalBlogWorkspaceFactory(IBloggerWorkspaceFactory):
-    """Personal blogger workspace factory."""
+class IPersonalPhotosWorkspace(IPhotoAlbum, IWorkspace):
+    """ photos workspace """
+
+
+class IPersonalPhotosWorkspaceFactory(IPhotosWorkspaceFactory):
+    """Personal photos workspace factory."""

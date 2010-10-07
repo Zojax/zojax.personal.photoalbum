@@ -21,83 +21,70 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.security.proxy import removeSecurityProxy
 
-from zojax.blogger.blog import BaseBlog
-from zojax.blogger.tags import BlogTags
-from zojax.blogger.category import CategoryContainer
+from zojax.photoalbum.album import BasePhotos
 
 from zojax.personal.space.interfaces import IPersonalSpace
 from zojax.personal.space.interfaces import IPersonalWorkspaceDescription
 from zojax.security.utils import checkPermissionForPrincipal
 
-from interfaces import _, IPersonalBlogWorkspace, IPersonalBlogWorkspaceFactory
+from interfaces import _, IPersonalPhotosWorkspace, IPersonalPhotosWorkspaceFactory
 
 
-class PersonalBlogWorkspace(BaseBlog):
-    interface.implements(IPersonalBlogWorkspace)
+class PersonalPhotosWorkspace(BasePhotos):
+    interface.implements(IPersonalPhotosWorkspace)
 
-    __name__ = u'blog'
+    __name__ = u'photos'
 
     @property
     def space(self):
         return self.__parent__
 
 
-class PersonalBlogWorkspaceFactory(object):
+class PersonalPhotosWorkspaceFactory(object):
     component.adapts(IPersonalSpace)
-    interface.implements(IPersonalBlogWorkspaceFactory)
+    interface.implements(IPersonalPhotosWorkspaceFactory)
 
-    title = _(u'Blog')
-    description = _(u'Personal blog')
+    title = _(u'Photos')
+    description = _(u'Personal photos')
     weight = 10
-    name = 'blog'
+    name = 'photos'
 
     def __init__(self, space):
         self.space = space
 
     def get(self):
-        return self.space.get('blog')
+        return self.space.get('photos')
 
     def install(self):
-        ws = self.space.get('blog')
+        ws = self.space.get('photos')
 
-        if not IPersonalBlogWorkspace.providedBy(ws):
-            ws = PersonalBlogWorkspace(
-                title="%s's Blog"%self.space.principal.title)
+        if not IPersonalPhotosWorkspace.providedBy(ws):
+            ws = PersonalPhotosWorkspace(
+                title="%s's Photos"%self.space.principal.title)
             event.notify(ObjectCreatedEvent(ws))
-            removeSecurityProxy(self.space)['blog'] = ws
+            removeSecurityProxy(self.space)['photos'] = ws
 
-        return self.space['blog']
+        return self.space['photos']
 
     def uninstall(self):
-        del self.space['blog']
+        del self.space['photos']
 
     def isInstalled(self):
-        return 'blog' in self.space
+        return 'photos' in self.space
 
     def isAvailable(self):
         return checkPermissionForPrincipal(
-            self.space.principal, 'zojax.PersonalBlog', self.space)
+            self.space.principal, 'zojax.PersonalPhotos', self.space)
 
 
-class PersonalBlogWorkspaceDescription(object):
+class PersonalPhotosWorkspaceDescription(object):
     interface.implements(IPersonalWorkspaceDescription)
 
-    name = 'blog'
-    title = _(u'Blog')
-    description = _(u'Personal blog')
+    name = 'photos'
+    title = _(u'Photos')
+    description = _(u'Personal photos')
 
     def createTemp(self, context):
-        ws = PersonalBlogWorkspace()
+        ws = PersonalPhotosWorkspace()
         ws.__parent__ = context
-
-        try:
-            ws[u'tags'] = BlogTags()
-        except:
-            pass
-
-        try:
-            ws[u'category'] = CategoryContainer()
-        except:
-            pass
-
         return ws
