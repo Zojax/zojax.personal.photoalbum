@@ -11,4 +11,20 @@
      factory="zojax.photoalbum.browser.actions.AddPhotoAction"
      provides="zojax.photoalbum.browser.interfaces.IAddPhotoAction" />
 
+  <!-- portlet managers -->
+  <zojax:portletManager
+     name="columns.left"
+     title="Left column portlets"
+     for="..interfaces.IPersonalPhotosWorkspace"
+     portlettype="zojax.personal.space.interfaces.IPersonalWorkspacePortlet"
+     class="zojax.personal.space.portletmanager.PortletManager" />
+
+  <zojax:portletManager
+     name="columns.right"
+     title="Right column portlets"
+     for="..interfaces.IPersonalPhotosWorkspace"
+     schema=".interfaces.IPersonalPhotosPortletManager"
+     portlettype="zojax.personal.space.interfaces.IPersonalWorkspacePortlet"
+     class="zojax.personal.space.portletmanager.PortletManager" />
+
 </configure>

@@ -64,14 +64,14 @@
                name="personal.member.space">
     <denyAll permission="zojax.AddPhoto" />
     <denyAll permission="zojax.SubmitPhoto" />
-    <denyAll permission="zojax.AddPhotoalbum" />
-    <denyAll permission="zojax.SubmitPhotoalbum" />
+    <denyAll permission="zojax.AddPhotoAlbum" />
+    <denyAll permission="zojax.SubmitPhotoAlbum" />
     <grant
        role="content.Owner"
        permission="zojax.AddPhoto" />
     <grant
        role="content.Owner"
-       permission="zojax.AddPhotoalbum" />
+       permission="zojax.AddPhotoAlbum" />
   </permissions>
 
 </configure>
