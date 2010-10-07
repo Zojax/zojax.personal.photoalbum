@@ -19,7 +19,7 @@ from zope import interface, schema
 from zojax.content.actions.interfaces import IAction
 from zojax.portlet.interfaces import IPortletManagerConfiguration
 
-from zojax.personal.photos.interfaces import _
+from zojax.personal.photoalbum.interfaces import _
 
 
 class IPersonalPhotosPortletManager(IPortletManagerConfiguration):
