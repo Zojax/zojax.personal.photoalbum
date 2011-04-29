@@ -30,6 +30,7 @@
        type="zojax.content.type.interfaces.IInactiveType" />
 
     <class class=".workspace.PersonalPhotosWorkspace">
+      <implements interface="zojax.ownership.interfaces.IInheritOwnership" />
       <implements interface="zojax.catalog.interfaces.ISearchContext" />
       <implements interface="zojax.content.type.interfaces.IRenameNotAllowed" />
       <implements interface="zojax.content.type.interfaces.ISearchableContent" />
