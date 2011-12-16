@@ -2,7 +2,6 @@
    xmlns="http://namespaces.zope.org/zope"
    xmlns:i18n="http://namespaces.zope.org/i18n"
    xmlns:zojax="http://namespaces.zope.org/zojax"
-   xmlns:i18n="http://namespaces.zope.org/i18n"
    i18n_domain="zojax.personal.photoalbum">
 
   <i18n:registerTranslations directory="locales" />
