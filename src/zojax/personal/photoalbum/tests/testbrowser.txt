@@ -1,0 +1,72 @@
+=============
+Browser tests
+=============
+
+    >>> from zope.interface import verify
+    >>> from zope.app.component.hooks import setSite
+    >>> from zope.app.security.interfaces import IAuthentication
+    >>> from zope.publisher.browser import TestRequest
+    >>> from zope.security.management import newInteraction, endInteraction
+    >>> from zojax.product import photoalbum as photoalbumProduct
+    >>> from zojax.personal.photoalbum import workspace, interfaces
+
+    >>> root = getRootFolder()
+    >>> setSite(root)
+    >>> sm = root.getSiteManager()
+    >>> sm.__bases__ = (photoalbumProduct,) + sm.__bases__
+    >>> request = TestRequest()
+    >>> request.setPrincipal(sm.getUtility(IAuthentication).getPrincipal('zope.mgr'))
+    >>> newInteraction(request)
+
+
+
+Blogger workspace factory
+=========================
+
+    >>> factory = workspace.PersonalPhotosWorkspaceFactory(root)
+    >>> print factory.isInstalled()
+    False
+
+    >>> print factory.isAvailable()
+    True
+
+    >>> factory.isInstalled()
+    False
+
+    >>> manager = factory.install()
+
+    >>> interfaces.IPersonalPhotosWorkspace.providedBy(manager)
+    True
+
+    >>> root['photos'] is manager
+    True
+
+    >>> factory.isInstalled()
+    True
+
+
+Verify contract implementation
+------------------------------
+
+    >>> verify.verifyClass(interfaces.IPersonalPhotosWorkspace, workspace.PersonalPhotosWorkspace)
+    True
+    >>> verify.verifyObject(interfaces.IPersonalPhotosWorkspace, root['photos'])
+    True
+
+    >>> verify.verifyObject(interfaces.IPhotoAlbum, root['photos'])
+    True
+
+
+Uninstall blog
+---------------
+
+    >>> factory.uninstall()
+    >>> 'photos' in root
+    False
+
+    >>> bases = list(sm.__bases__)
+    >>> bases.remove(photoalbumProduct)
+    >>> sm.__bases__ = tuple(bases)
+
+    >>> endInteraction()
+    >>> setSite(None)
