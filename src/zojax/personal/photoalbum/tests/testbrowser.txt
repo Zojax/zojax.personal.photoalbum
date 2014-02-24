@@ -14,9 +14,6 @@ Browser tests
     >>> setSite(root)
     >>> sm = root.getSiteManager()
     >>> sm.__bases__ = (photoalbumProduct,) + sm.__bases__
-    >>> request = TestRequest()
-    >>> request.setPrincipal(sm.getUtility(IAuthentication).getPrincipal('zope.mgr'))
-    >>> newInteraction(request)
 
 
 
@@ -34,6 +31,9 @@ Blogger workspace factory
     False
 
     >>> manager = factory.install()
+
+    >>> 'photos' in root
+    True
 
     >>> interfaces.IPersonalPhotosWorkspace.providedBy(manager)
     True

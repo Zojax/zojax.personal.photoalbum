@@ -1,0 +1,10 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.personal.photoalbum">
+
+    <class class="zope.app.folder.folder.Folder">
+      <implements interface="zojax.ownership.interfaces.IOwnership" />
+    </class>
+
+</configure>

@@ -4,16 +4,15 @@
    xmlns:browser="http://namespaces.zope.org/browser"
    i18n_domain="zojax.personal.photoalbum">
 
-  <exclude package="zope.app.securitypolicy.browser" />
 
   <include package="zojax.autoinclude" file="meta.zcml" />
   <includeAllDependencies package="zojax.personal.photoalbum" extras="test" />
 
-  <includeOverrides package="zojax.personal.space.tests" file="overrides.zcml" />
+  <includeOverrides package="zojax.personal.photoalbum.tests" file="overrides.zcml" />
 
   <interface
      name="DefaultSkin"
-     interface="zojax.personal.space.tests.tests.IDefaultSkin"
+     interface="zojax.personal.photoalbum.tests.tests.IDefaultSkin"
      type="zope.publisher.interfaces.browser.IBrowserSkinType" />
 
   <browser:defaultSkin name="DefaultSkin" />
